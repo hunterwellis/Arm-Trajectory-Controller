@@ -1,0 +1,11 @@
+# Default initial positions for arm's ros2_control fake system
+
+initial_positions:
+  J1: 0
+  J2: 0
+  J3: 0
+  J4: 0
+  J5: -1.571
+  J6: 0
+  JLeft: 0
+  JRight: 0

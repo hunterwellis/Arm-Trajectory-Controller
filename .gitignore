@@ -1,0 +1,5 @@
+/log/*
+/install/*
+/build/*
+/.cache/*
+compile_commands.json

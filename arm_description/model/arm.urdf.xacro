@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<!-- Hunter Ellis: modified to work with gazebo -->
+<robot xmlns:xacro="https://www.ros.org/wiki/xacro" name="arm">
+  <xacro:property name="PI" value="3.14159274"/>
+  <xacro:include filename="$(find arm_description)/model/arm.gazebo.xacro" />
+  <xacro:include filename="$(find arm_description)/control/arm_ros2_control.xacro" />
+
+  <material name="white">
+    <color rgba="1 1 1 1" />
+  </material>
+  <link name="world"/>
+  <joint name="base_to_world" type="fixed">
+    <child link="base_link" />
+    <parent link="world" />
+    <origin xyz="0.15 0 0" rpy="0 0 ${PI}" />    
+  </joint> 
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.11268 0.013885 0.077154"
+        rpy="0 0 0" />
+      <mass
+        value="0.43666" />
+      <inertia
+        ixx="0.00027549"
+        ixy="4.2095E-06"
+        ixz="2.421E-10"
+        iyy="0.00079795"
+        iyz="-3.5553E-11"
+        izz="0.00059632" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="white">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="0.0063779 0.04888 -0.0022943"
+        rpy="0 0 0" />
+      <mass
+        value="0.35633" />
+      <inertia
+        ixx="0.00017591"
+        ixy="2.2378E-05"
+        ixz="5.373E-05"
+        iyy="0.00032305"
+        iyz="4.5338E-06"
+        izz="0.00037059" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="white">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J1"
+    type="continuous">
+    <origin
+      xyz="0.087103 -0.077154 0.054376"
+      rpy="1.5708 0 -0.17957" />
+    <parent
+      link="base_link" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="-0.0019445 0.065859 -0.034727"
+        rpy="0 0 0" />
+      <mass
+        value="0.26746" />
+      <inertia
+        ixx="0.00071684"
+        ixy="-3.9596E-05"
+        ixz="1.1486E-05"
+        iyy="8.2739E-05"
+        iyz="1.6945E-05"
+        izz="0.00077438" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link2.STL" />
+      </geometry>
+      <material
+        name="white">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J2"
+    type="continuous">
+    <origin
+      xyz="-0.0383525749921799 0.0583000000000001 -0.0013208705506468"
+      rpy="0.0114835938093404 -0.000363602890144003 0.0633037833578822" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0.178603115585449 0 0.983921199641095" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="0.0130563478238648 0.00105076957686756 0.00197573396878213"
+        rpy="0 0 0" />
+      <mass
+        value="0.222311320377134" />
+      <inertia
+        ixx="9.15294723513773E-05"
+        ixy="-2.93868065975673E-06"
+        ixz="5.36688667027622E-06"
+        iyy="0.00012003016865184"
+        iyz="-5.92765685832411E-06"
+        izz="0.000140784486113707" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link3.STL" />
+      </geometry>
+      <material
+        name="white">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J3"
+    type="continuous">
+    <origin
+      xyz="0.01012184118035 0.159668946677294 -0.00183733450496954"
+      rpy="-0.0341579908525323 -0.00324248866976051 -0.189267104095329" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0.178603115585449 0 0.983921199641095" />
+  </joint>
+  <link
+    name="link4">
+    <inertial>
+      <origin
+        xyz="0.00802792604442943 0.00104408266558731 -0.00105833882848673"
+        rpy="0 0 0" />
+      <mass
+        value="0.1696257012172" />
+      <inertia
+        ixx="5.17820793133401E-05"
+        ixy="-6.63726230268935E-06"
+        ixz="8.90032415343836E-06"
+        iyy="0.000101876628194636"
+        iyz="1.17168186802823E-06"
+        izz="9.3966015439911E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link4.STL" />
+      </geometry>
+      <material
+        name="white">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J4"
+    type="continuous">
+    <origin
+      xyz="-3.63625649351731E-05 0.0148771771133325 0.0105252497783941"
+      rpy="0.0192434154802188 0.00255235780533698 -0.00346944801670467" />
+    <parent
+      link="link3" />
+    <child
+      link="link4" />
+    <axis
+      xyz="0.97586466350816 0.127708020083281 -0.17714067890384" />
+  </joint>
+  <link
+    name="link5">
+    <inertial>
+      <origin
+        xyz="0.00207136926136327 0.00132324610517903 -0.000396911101235978"
+        rpy="0 0 0" />
+      <mass
+        value="0.0179895273320859" />
+      <inertia
+        ixx="2.01072029683863E-06"
+        ixy="-3.67044819195393E-07"
+        ixz="2.26773043949782E-08"
+        iyy="2.36455919952921E-06"
+        iyz="6.0347923268703E-08"
+        izz="2.09143498833267E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link5.STL" />
+      </geometry>
+      <material
+        name="white">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_description/model/meshes/link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J5"
+    type="continuous">
+    <origin
+      xyz="-0.135560517031385 -0.0176394821004389 0.0246051802150107"
+      rpy="-3.01860336767631 0.324554663782284 0.719451490827395" />
+    <parent
+      link="link4" />
+    <child
+      link="link5" />
+    <axis
+      xyz="0.176090142676508 0.0195610841602276 0.98417967142115" />
+  </joint>
+
+  <!-- To use an end effector replace the ee.STL file in the arm_description/model/meshes directory
+       with the end effector that you would like to use and uncomment the following section -->
+  <!-- <link -->
+  <!--   name="ee"> -->
+  <!--   <inertial> -->
+  <!--     <origin -->
+  <!--       xyz="0.00036692 -0.00026843 0.027707" -->
+  <!--       rpy="0 0 0" /> -->
+  <!--     <mass -->
+  <!--       value="0.027464" /> -->
+  <!--     <inertia -->
+  <!--       ixx="9.1511E-06" -->
+  <!--       ixy="-9.3123E-13" -->
+  <!--       ixz="3.3145E-14" -->
+  <!--       iyy="5.0332E-06" -->
+  <!--       iyz="4.6816E-10" -->
+  <!--       izz="1.1896E-05" /> -->
+  <!--   </inertial> -->
+  <!--   <visual> -->
+  <!--     <origin -->
+  <!--       xyz="0 0 0" -->
+  <!--       rpy="0 0 0" /> -->
+  <!--     <geometry> -->
+  <!--       <mesh -->
+  <!--         filename="package://arm_description/model/meshes/ee.STL" /> -->
+  <!--     </geometry> -->
+  <!--     <material -->
+  <!--       name="white"> -->
+  <!--     </material> -->
+  <!--   </visual> -->
+  <!--   <collision> -->
+  <!--     <origin -->
+  <!--       xyz="0 0 0" -->
+  <!--       rpy="0 0 0" /> -->
+  <!--     <geometry> -->
+  <!--       <mesh -->
+  <!--         filename="package://arm_description/model/meshes/ee.STL" /> -->
+  <!--     </geometry> -->
+  <!--   </collision> -->
+  <!-- </link> -->
+  <!-- <joint -->
+  <!--   name="J6" -->
+  <!--   type="continuous"> -->
+  <!--   <origin -->
+  <!--     xyz="-0.0199666324199864 -0.0127552190119366 0.00382596102472059" -->
+  <!--     rpy="-1.41021344284507 -0.0773897000977449 2.12675451737731" /> -->
+  <!--   <parent -->
+  <!--     link="link5" /> -->
+  <!--   <child -->
+  <!--     link="ee" /> -->
+  <!--   <axis -->
+  <!--     xyz="0 0 1" /> -->
+  <!-- </joint> -->
+  <xacro:arm_gazebo/>
+  <xacro:arm_ros2_control/>
+</robot>
