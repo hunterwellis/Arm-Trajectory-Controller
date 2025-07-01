@@ -20,7 +20,7 @@ def generate_launch_description():
     desc_pkg_path = get_package_share_directory('arm_description')
 
     # load arm description files
-    urdf_path = os.path.join(desc_pkg_path, 'model', 'arm.urdf.xacro')
+    urdf_path = os.path.join(desc_pkg_path, 'model', 'arm.urdf')
     with open(urdf_path, 'r') as infp:
         robot_desc = infp.read()
 
