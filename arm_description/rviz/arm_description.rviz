@@ -1,18 +1,19 @@
-Panels:
-  - Class: rviz_common/Displays
-    Help Height: 70
-    Name: Displays
-    Property Tree Widget:
-      Expanded:
-        - /RobotModel1
-        - /TF1
-      Splitter Ratio: 0.5
-    Tree Height: 326
-  - Class: rviz_common/Views
-    Expanded:
-      - /Current View1
-    Name: Views
-    Splitter Ratio: 0.5
+# Panels:
+#   - Class: rviz_common/Displays
+#     Help Height: 70
+#     Name: Displays
+#     Property Tree Widget:
+#       Expanded:
+#         - /RobotModel1
+#         - /TF1
+#       Splitter Ratio: 0.5
+#     Tree Height: 326
+#   - Class: rviz_common/Views
+#     Expanded:
+#       - /Current View1
+#     Name: Views
+#     Splitter Ratio: 0.5
+
 Visualization Manager:
   Class: ""
   Displays:
@@ -208,7 +209,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 0; 0; 0
+    Background Color: 48; 48; 48
     Fixed Frame: base_link
     Frame Rate: 30
   Name: root
@@ -241,6 +242,7 @@ Visualization Manager:
       Value: Orbit (rviz)
       Yaw: 0.5368145108222961
     Saved: ~
+
 Window Geometry:
   Displays:
     collapsed: false
