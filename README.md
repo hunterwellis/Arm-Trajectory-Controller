@@ -16,7 +16,7 @@ ros2 launch arm_description jsp_link.launch.py
 
 To control the arm in cartesian space use the `control.launch.py` launch file.
 ```bash
-ros2 launch arm_link control.launch.py
+ros2 launch arm_interface control.launch.py
 ```
 
 ## Control Interface
