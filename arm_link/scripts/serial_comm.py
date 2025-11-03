@@ -3,8 +3,8 @@
 import serial
 import time
 
-
 class SerialComm:
+    # May need to change port
     def __init__(self, port='/dev/ttyACM0', baudrate=9600, timeout=1):
         self.port = port
         self.baudrate = baudrate
@@ -30,16 +30,6 @@ class SerialComm:
             # print("Message sent.")
         else:
             print("Serial connection not open. Cannot send message.")
-
-    # def receive_message(self):
-    #     if self.ser and self.ser.is_open:
-    #         message = self.ser.readline().decode('utf-8').strip()
-    #         if message:
-    #             print(f"Received: {message}")
-    #         return message
-    #     else:
-    #         print("Serial connection not open. Cannot receive message.")
-    #         return None
 
 
 def main():
