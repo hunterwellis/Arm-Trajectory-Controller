@@ -3,6 +3,7 @@
 import serial
 import time
 
+
 class SerialComm:
     # May need to change port
     def __init__(self, port='/dev/ttyACM0', baudrate=9600, timeout=1):

@@ -24,6 +24,7 @@ include_directories(
 # Core Library
 add_library(${PROJECT_NAME}_core
   src/interface.cpp
+  src/serial_port/serial_port.cpp
 )
 
 ament_target_dependencies(${PROJECT_NAME}_core
@@ -37,6 +38,18 @@ target_include_directories(${PROJECT_NAME}_core
     $<INSTALL_INTERFACE:include>
 )
 
+# Serial Port Node
+add_executable(serial_node
+  src/serial_port/serial_port_node.cpp
+)
+
+ament_target_dependencies(serial_node
+  rclcpp
+  sensor_msgs
+)
+
+target_link_libraries(serial_node arm_interface_core)
+
 # Headless Node
 add_executable(${PROJECT_NAME}_node
   src/interface_node.cpp
@@ -47,12 +60,15 @@ ament_target_dependencies(${PROJECT_NAME}_node
   sensor_msgs
 )
 
-ament_target_dependencies(${PROJECT_NAME}_node rclcpp)
+target_link_libraries(serial_node arm_interface_core)
 
+
+# Install
 install(
   TARGETS
     ${PROJECT_NAME}_core
     ${PROJECT_NAME}_node
+    serial_node
   EXPORT export_${PROJECT_NAME}
   RUNTIME DESTINATION lib/${PROJECT_NAME}
   ARCHIVE DESTINATION lib

@@ -9,7 +9,7 @@ colcon build
 source ./install/setup.bash
 ```
 
-To control the individual joints with the joint state publisher launch file.
+To control the individual joints use the joint state publisher launch file.
 ```bash
 ros2 launch arm_description jsp_link.launch.py
 ```
@@ -21,7 +21,6 @@ ros2 launch arm_interface control.launch.py
 
 ## Control Interface
 To interface the with the trajectory controller
-
 
 ## Requirements
 - Ubuntu 24.04+
