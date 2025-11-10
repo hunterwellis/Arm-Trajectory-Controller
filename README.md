@@ -9,12 +9,12 @@ colcon build
 source ./install/setup.bash
 ```
 
-To control the individual joints use the joint state publisher launch file.
+To control the individual joints use the joint state publisher GUI launch file.
 ```bash
 ros2 launch arm_description jsp_link.launch.py
 ```
 
-To control the arm in cartesian space use the `control.launch.py` launch file.
+Control the arm in cartesian space using the `control.launch.py` launch file.
 ```bash
 ros2 launch arm_interface control.launch.py
 ```
@@ -27,3 +27,4 @@ To interface the with the trajectory controller
 - ROS2 Jazzy
 - Jazzy control packages
 - MoveIt!
+

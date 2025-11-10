@@ -21,18 +21,14 @@ include_directories(
   src
 )
 
-# Core Library
-add_library(${PROJECT_NAME}_core
-  src/interface.cpp
+# Serial Library
+add_library(serial_port
   src/serial_port/serial_port.cpp
 )
-
-ament_target_dependencies(${PROJECT_NAME}_core
+ament_target_dependencies(serial_port
   rclcpp
-  sensor_msgs
 )
-
-target_include_directories(${PROJECT_NAME}_core
+target_include_directories(serial_port
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
@@ -42,33 +38,28 @@ target_include_directories(${PROJECT_NAME}_core
 add_executable(serial_node
   src/serial_port/serial_port_node.cpp
 )
-
 ament_target_dependencies(serial_node
   rclcpp
   sensor_msgs
 )
+target_link_libraries(serial_node serial_port)
 
-target_link_libraries(serial_node arm_interface_core)
-
-# Headless Node
-add_executable(${PROJECT_NAME}_node
-  src/interface_node.cpp
+# interface
+add_executable(arm_serial_interface
+  src/interface.cpp
 )
-
-ament_target_dependencies(${PROJECT_NAME}_node
+ament_target_dependencies(arm_serial_interface
   rclcpp
   sensor_msgs
 )
-
-target_link_libraries(serial_node arm_interface_core)
+target_link_libraries(arm_serial_interface serial_port)
 
 
 # Install
 install(
   TARGETS
-    ${PROJECT_NAME}_core
-    ${PROJECT_NAME}_node
     serial_node
+    arm_serial_interface
   EXPORT export_${PROJECT_NAME}
   RUNTIME DESTINATION lib/${PROJECT_NAME}
   ARCHIVE DESTINATION lib
