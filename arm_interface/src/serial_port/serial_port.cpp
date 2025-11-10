@@ -17,7 +17,7 @@ bool SerialPort::open_port() {
   
   // config port
   struct termios tty;
-  if (tcgetattr(fd_, &tty)) {
+  if (tcgetattr(fd_, &tty) != 0) {
     RCLCPP_ERROR(logger_, "Error getting termios attributes %s",
         port_.c_str());
     close(fd_);
@@ -40,7 +40,7 @@ bool SerialPort::open_port() {
   tty.c_cflag &= ~CSTOPB; // one stop bit
   tty.c_cflag &= ~CRTSCTS; // no hardware flow control
 
-  if (tcsetattr(fd_, TCSANOW, &tty)) {
+  if (tcsetattr(fd_, TCSANOW, &tty) != 0) {
     RCLCPP_ERROR(logger_, "Error setting termios attributes %s",
         port_.c_str());
     close(fd_);
