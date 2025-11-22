@@ -10,19 +10,32 @@
 class ArmInterface : public rclcpp::Node {
   public:
     ArmInterface() : Node("arm_interface") {
-      declare_parameter<std::string>("port", "/dev/ttyACM0");
-      declare_parameter<int>("baudrate", 115200);
+      this->declare_parameter("port", "/dev/ttyACM0");
+      this->declare_parameter("baudrate", 115200);
 
       std::string port = get_parameter("port").as_string();
       int baudrate = get_parameter("baudrate").as_int();
 
       serial_ = std::make_unique<SerialPort>(port, baudrate);
 
-      subscriber_ = create_subscription<std_msgs::msg::String>(
-        "serial_tx", 10,
+      // serial tx channel
+      serial_publisher_ = create_publisher<std_msgs::msg::String>("serial_tx", 10);
+
+      // subscribe to rx messages
+      serial_subscriber_ = create_subscription<std_msgs::msg::String>(
+        "serial_rx", 10,
         [this] (const std_msgs::msg::String::SharedPtr msg) {
           serial_->write_data(msg->data);
         }
+      );
+
+      // subscribe to joint_state messages
+      joint_state_subscriber_ = create_subscription<sensor_msgs::msg::JointState>(
+          "robot_state_publisher", 10,
+          [this] (const sensor_msgs::msg::JointState msg) {
+            std_msgs::msg::String str = serial_format(msg);
+            serial_publisher_->publish(str);
+          }
       );
     }
 
@@ -34,9 +47,26 @@ class ArmInterface : public rclcpp::Node {
 
   private:
     std::unique_ptr<SerialPort> serial_;
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscriber_;
+    rclcpp::TimerBase::SharedPtr timer_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr serial_publisher_;
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr serial_subscriber_;
+    rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_state_subscriber_;
 
-    // std::string js_to_string(sensor_msgs::msg::JointState msg);
+    void serial_rx() {
+      auto data = serial_->read_data();
+      if (!data.empty()) {
+        std_msgs::msg::String msg;
+        msg.data = data;
+        serial_publisher_->publish(msg);
+      }
+    }
+
+    std_msgs::msg::String serial_format(sensor_msgs::msg::JointState msg) const {
+      std_msgs::msg::String str_msg;
+      return str_msg;
+    }
+    
+    // rclcpp::Logger logger_ = rclcpp::get_logger("arm_interface");
 };
 
 int main (int argc, char *argv[]) {

@@ -35,31 +35,32 @@ target_include_directories(serial_port
 )
 
 # Serial Port Node
-add_executable(serial_node
+add_executable(SerialNode
   src/serial_port/serial_port_node.cpp
 )
-ament_target_dependencies(serial_node
+
+ament_target_dependencies(SerialNode
   rclcpp
   sensor_msgs
 )
-target_link_libraries(serial_node serial_port)
+target_link_libraries(SerialNode serial_port)
 
 # interface
-add_executable(arm_serial_interface
+add_executable(SerialInterface
   src/interface.cpp
 )
-ament_target_dependencies(arm_serial_interface
+ament_target_dependencies(SerialInterface
   rclcpp
   sensor_msgs
 )
-target_link_libraries(arm_serial_interface serial_port)
+target_link_libraries(SerialInterface serial_port)
 
 
 # Install
 install(
   TARGETS
-    serial_node
-    arm_serial_interface
+    SerialNode
+    SerialInterface
   EXPORT export_${PROJECT_NAME}
   RUNTIME DESTINATION lib/${PROJECT_NAME}
   ARCHIVE DESTINATION lib

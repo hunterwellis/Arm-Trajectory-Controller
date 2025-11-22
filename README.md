@@ -4,6 +4,7 @@ Trajectory control packages for my robotic arm.
 ## Quickstart
 Add the packages to your ROS2 workspace. Source and build the packages.
 ```bash
+git clone https://github.com/hunterwellis/Arm-Trajectory-Controller.git /path/to/ws/src
 source /opt/ros/jazzy/setup.bash
 colcon build
 source ./install/setup.bash
@@ -27,4 +28,3 @@ To interface the with the trajectory controller
 - ROS2 Jazzy
 - Jazzy control packages
 - MoveIt!
-
